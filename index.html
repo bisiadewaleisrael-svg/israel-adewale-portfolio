@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Israel Adewale — Motion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: quiet, confident, gallery-like. The work does the talking.
+   IDEA: a printed lookbook. One piece per spread, generous margins, a caption line under each.
+   PICTURE: the videos themselves, large, playing silently as you scroll past.
+   COLOUR and TYPE: white paper and black ink, grey for captions; Geist at a few weights.
+   LAYOUT: name and statement, then one project per row, about, contact. Single column, max 1100px. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0c0c0c);--ink:light-dark(#0d0d0d,#f1f1ef);--mute:light-dark(#7a7a78,#8f8f8b);--line:light-dark(#e8e8e6,#222221);--soft:light-dark(#f4f4f2,#161615)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Geist,system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 max(5vw,20px)}
+
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.name{font-weight:600;text-decoration:none;font-size:16px}
+header nav{display:flex;gap:4px}
+header nav a{text-decoration:none;color:var(--mute);padding:10px 10px;font-size:15px}
+header nav a:hover{color:var(--ink)}
+
+.intro{padding:clamp(56px,11vw,140px) 0 clamp(48px,8vw,96px)}
+.intro h1{margin:0;font-weight:500;font-size:clamp(34px,6vw,64px);line-height:1.05;letter-spacing:-.035em;max-width:15ch;text-wrap:balance}
+.intro p{margin:24px 0 0;color:var(--mute);font-size:17px;max-width:46ch}
+
+.work{display:flex;flex-direction:column;gap:clamp(64px,10vw,120px)}
+.proj figure{margin:0}
+.frame{position:relative;aspect-ratio:16/9;background:var(--soft);border-radius:6px;overflow:hidden;cursor:pointer}
+.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hint{position:absolute;right:14px;bottom:14px;font-size:13px;font-weight:500;color:#fff;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);padding:7px 12px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none}
+.frame:hover .hint,.frame:focus-visible .hint{opacity:1}
+.frame.sound .hint{display:none}
+.cap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;margin-top:18px;align-items:baseline}
+.cap h2{margin:0;font-size:18px;font-weight:500;letter-spacing:-.01em}
+.cap h2 span{color:var(--mute);font-weight:400}
+.cap .len{color:var(--mute);font-size:15px;font-variant-numeric:tabular-nums}
+.cap p{grid-column:1/-1;margin:2px 0 0;color:var(--mute);max-width:62ch;font-size:15px}
+.opts{grid-column:1/-1;display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}
+.opts button{font-size:14px;color:var(--mute);padding:6px 0;border-bottom:1px solid transparent}
+.opts button[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
+
+.note{margin:clamp(56px,8vw,96px) 0 0;padding-top:20px;border-top:1px solid var(--line);color:var(--mute);font-size:14px;max-width:70ch}
+
+section.block{padding:clamp(80px,12vw,150px) 0 0}
+.label{font-size:14px;color:var(--mute);margin:0 0 20px}
+.about{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(32px,6vw,90px)}
+.about p{margin:0 0 16px;font-size:clamp(18px,2vw,21px);line-height:1.5;letter-spacing:-.01em}
+.facts{list-style:none;margin:0;padding:0}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.facts li:first-child{border-top:1px solid var(--line)}
+.facts span:first-child{color:var(--mute)}
+.facts span:last-child{text-align:right}
+.services{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.services li{font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px}
+
+.contact h2{margin:0;font-weight:500;font-size:clamp(30px,5.4vw,58px);line-height:1.05;letter-spacing:-.035em}
+.mail{display:inline-block;margin-top:22px;font-size:clamp(18px,3vw,28px);letter-spacing:-.02em;text-underline-offset:6px;text-decoration-thickness:1px;overflow-wrap:anywhere}
+.row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.row button{font-size:15px;color:var(--mute);min-height:44px;text-decoration:underline;text-underline-offset:4px}
+.row button:hover{color:var(--ink)}
+
+footer{margin-top:clamp(80px,12vw,150px);border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-block:24px;color:var(--mute);font-size:14px}
+
+@media(max-width:700px){.about{grid-template-columns:1fr}.hint{opacity:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="name" href="#top">Israel Adewale</a>
+  <nav><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main class="wrap" id="top">
+  <section class="intro">
+    <h1>Motion design for brands and apps.</h1>
+    <p>I'm Israel, a motion designer in Lagos. I make short, sharp videos that explain products and make brands feel alive.</p>
+  </section>
+
+  <section id="work" aria-label="Selected work">
+    <div class="work" id="list"></div>
+    <p class="note">Disclaimer: these are independent concept pieces made to show my work. None of these videos have been used, commissioned or endorsed by the companies shown, and all real brand names and logos belong to their owners. Aerovia and Sonara are fictional brands I created.</p>
+  </section>
+
+  <section class="block" id="about">
+    <p class="label">About</p>
+    <div class="about">
+      <div>
+        <p>I design and animate everything myself, from storyboard to final sound. For each brief I usually explore two or three directions, so you choose a look instead of settling for one.</p>
+        <p>I mostly make app walkthroughs, brand promos, explainers and lyric videos, built for the feed and the big screen.</p>
+        <ul class="services"><li>App and product ads</li><li>Brand promos</li><li>Explainers</li><li>Lyric videos</li><li>Event and church media</li></ul>
+      </div>
+      <ul class="facts">
+        <li><span>Based in</span><span>Lagos, Nigeria</span></li>
+        <li><span>Works</span><span>Remote, worldwide</span></li>
+        <li><span>Formats</span><span>16:9, 9:16, 1:1</span></li>
+        <li><span>Typical length</span><span>10–30 seconds</span></li>
+        <li><span>Languages</span><span>English, Yoruba, Pidgin</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <p class="label">Contact</p>
+    <h2>Have something to animate?</h2>
+    <a class="mail" href="mailto:bisiadewaleisrael@gmail.com?subject=Motion%20design%20project">bisiadewaleisrael@gmail.com</a>
+    <div class="row"><button id="copy" type="button">Copy email</button></div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Israel Adewale</span><span>Concept work. Not used or endorsed by the brands shown.</span></div></footer>
+
+<script>
+{
+const W=[
+ {t:'Aerovia',k:'Airline launch ad',d:'Lagos to London, Dubai and New York as illustrated skylines, each with local time and weather. Fictional brand.',v:[['aerovia',18]]},
+ {t:'Sonara',k:'Music app ad',d:'An AI playlist app, from "What does your day sound like?" to a prompt, a playlist and the logo. Fictional brand.',v:[['sonara',22]]},
+ {t:'Bolt',k:'App UI ad',d:'The ride-booking flow animated on a phone, from destination to confirming a ride.',v:[['bolt',16]]},
+ {t:'Clover Design Studio',k:'Brand promo',d:'Kinetic type for a Nigerian branding studio: "We build brands people remember."',v:[['clover',22]]},
+ {t:'Paystrait',k:'Fintech app ad',d:'Campus QR payments, in two directions.',v:[['paystrait-a',21,'Dark UI'],['paystrait-b',20,'Bold yellow']]},
+ {t:'Breet',k:'Crypto app ad',d:'Selling crypto for naira, animated step by step inside the app.',v:[['breet',23]]},
+ {t:'SpaceTrade',k:'Fintech ad',d:'Got a gift card? Drop it in, cash out. Flat illustration and money motion.',v:[['spacetrade',21]]},
+ {t:'How to use Amazon',k:'Explainer',d:'A 97-second illustrated how-to, made in three styles.',v:[['amazon-a',97,'Whiteboard'],['amazon-b',97,'Sketchbook'],['amazon-c',97,'Classic']]},
+ {t:'C&B (Cast & Bind)',k:'Lyric video',d:'Synced kinetic lyrics for Greatman Takit, in a streaming-app style.',v:[['lyric',27]]},
+ {t:'Up Next',k:'Announcement bumper',d:'A high-energy announcement sting built from repeating type.',v:[['upnext',11]]},
+ {t:'Welcome to Service',k:'Service opener',d:'A black-and-gold opener for church services and events.',v:[['service',11]]}
+];
+const fmt=s=>{s=Math.round(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const list=document.getElementById('list');
+list.innerHTML=W.map((w,i)=>`<article class="proj" data-i="${i}"><figure>
+  <div class="frame" tabindex="0" role="button" aria-label="Play ${w.t} with sound">
+    <video muted loop playsinline preload="none" poster="p/${w.v[0][0]}.jpg" data-src="v/${w.v[0][0]}.mp4"></video>
+    <span class="hint">Play with sound</span>
+  </div>
+  <figcaption class="cap">
+    <h2>${w.t} <span>— ${w.k}</span></h2><span class="len">${fmt(w.v[0][1])}</span>
+    <p>${w.d}</p>
+    ${w.v.length>1?`<div class="opts" role="group" aria-label="Versions">${w.v.map((o,j)=>`<button type="button" data-j="${j}" aria-pressed="${j===0}">${o[2]}</button>`).join('')}</div>`:''}
+  </figcaption></figure></article>`).join('');
+
+const vids=[...list.querySelectorAll('video')];
+const ensure=v=>{if(!v.getAttribute('src'))v.src=v.dataset.src};
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  const v=e.target,f=v.parentElement;
+  if(e.isIntersecting){ensure(v);if(!reduce||f.classList.contains('sound'))v.play().catch(()=>{})}
+  else{v.pause();if(f.classList.contains('sound')){v.muted=true;v.controls=false;f.classList.remove('sound')}}
+}),{threshold:.5});
+vids.forEach(v=>io.observe(v));
+
+function soundOn(f){
+  const v=f.querySelector('video');
+  vids.forEach(o=>{if(o!==v&&!o.muted){o.muted=true;o.controls=false;o.parentElement.classList.remove('sound')}});
+  ensure(v);f.classList.add('sound');v.muted=false;v.controls=true;v.currentTime=0;v.play().catch(()=>{});
+}
+list.querySelectorAll('.frame').forEach(f=>{
+  f.addEventListener('click',()=>{if(!f.classList.contains('sound'))soundOn(f)});
+  f.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!f.classList.contains('sound')){e.preventDefault();soundOn(f)}});
+});
+list.querySelectorAll('.proj').forEach(p=>{
+  const w=W[+p.dataset.i],v=p.querySelector('video'),f=p.querySelector('.frame'),len=p.querySelector('.len');
+  p.querySelectorAll('.opts button').forEach(b=>b.addEventListener('click',()=>{
+    const [k,s]=w.v[+b.dataset.j];
+    p.querySelectorAll('.opts button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    v.dataset.src='v/'+k+'.mp4';v.poster='p/'+k+'.jpg';v.src=v.dataset.src;len.textContent=fmt(s);
+    if(f.classList.contains('sound')){v.muted=false}
+    if(!reduce||f.classList.contains('sound'))v.play().catch(()=>{});
+  }));
+});
+
+document.getElementById('copy').addEventListener('click',async e=>{
+  const b=e.currentTarget;
+  try{await navigator.clipboard.writeText('bisiadewaleisrael@gmail.com');b.textContent='Copied'}catch{b.textContent='Copy failed, use the address above'}
+  setTimeout(()=>b.textContent='Copy email',2200);
+});
+}
+</script>
+</body>
+</html>
